@@ -1,5 +1,6 @@
 package com.hyeon.simple_project.service;
 
+import com.hyeon.simple_project.vo.AwsCredentialsVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,23 +17,32 @@ import java.util.*;
 public class SimpleService {
 
     @Value("${aws.accessKey}")
-    String accessKey;
+    private String accessKey;
 
     @Value("${aws.secretKey}")
-    String secretKey;
+    private String secretKey;
 
     @Value("${aws.region}")
-    String region;
+    private String region;
 
+
+    public AwsCredentialsVo getValuesVo(String accessKey, String secretKey, String region) {
+        AwsCredentialsVo credentVo = new AwsCredentialsVo();
+        credentVo.setAccessKey(accessKey);
+        credentVo.setSecretKey(secretKey);
+        credentVo.setRegion(region);
+        log.info("debug credentVo = {}", credentVo);
+        return credentVo;
+    }
 
     /**
      * 자격증명 생성
      * @return
      */
-    public AwsBasicCredentials credentials() {
+    public AwsBasicCredentials credentials(AwsCredentialsVo credentVo) {
         // 자격증명 설정
-        AwsBasicCredentials awsCredentials = AwsBasicCredentials.create(accessKey,
-                secretKey);
+        AwsBasicCredentials awsCredentials = AwsBasicCredentials.create(credentVo.getAccessKey(),
+                credentVo.getSecretKey());
         return awsCredentials;
     }
 
@@ -40,12 +50,12 @@ public class SimpleService {
      * AWS IamClient 생성
      * @return
      */
-    public IamClient iamClient() {
+    public IamClient iamClient(AwsCredentialsVo credentVo) {
         // 자격증명 설정
-        AwsBasicCredentials awsCredentials = credentials();
+        AwsBasicCredentials awsCredentials = credentials(credentVo);
 
         // IAM 클라이언트 구성
-        IamClient client = IamClient.builder().region(Region.of(region))
+        IamClient client = IamClient.builder().region(Region.of(credentVo.getRegion()))
                 .credentialsProvider(StaticCredentialsProvider.create(awsCredentials)).build();
         return client;
     }
@@ -54,10 +64,10 @@ public class SimpleService {
      * AWS Iam User 목록 획득
      * @return
      */
-    public List<String> getIamUserList() {
+    public List<String> getIamUserList(AwsCredentialsVo credentVo) {
         ArrayList<String> userList = new ArrayList<>();
 
-        IamClient client = iamClient();
+        IamClient client = iamClient(credentVo);
 
         try {
 
@@ -91,27 +101,8 @@ public class SimpleService {
             }
         } catch (IamException e) {
             System.err.println(e.awsErrorDetails().errorMessage());
-//            System.exit(1);
         }
 
         return userList;
     }
-
-    public List<Map> getValues() {
-        ArrayList<Map> valueList = new ArrayList<>();
-        Map<String, String> accessKey_map = new HashMap<String, String>();
-        Map<String, String> secretKey_map = new HashMap<String, String>();
-        Map<String, String> region_map = new HashMap<String, String>();
-        accessKey_map.put("accessKey", accessKey);
-        secretKey_map.put("secretKey", secretKey);
-        region_map.put("region", region);
-
-        valueList.add(accessKey_map);
-        valueList.add(secretKey_map);
-        valueList.add(region_map);
-
-        return valueList;
-    }
-
-
 }
