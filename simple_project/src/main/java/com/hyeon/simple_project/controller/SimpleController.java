@@ -29,7 +29,7 @@ public class SimpleController {
 
 
 
-	// 조직 내 정책 리스트 보기
+	// IAM 유저 목록 조회
 	@GetMapping("/getUsers")
 	public List<String> getUsers() {
 		AwsCredentialsVo credentVo = simpService.getValuesVo(accessKey, secretKey, region);
