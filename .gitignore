@@ -34,3 +34,4 @@ build/
 
 ### properties ###
 *application.properties
+simple_project/src/main/resources/application.properties
