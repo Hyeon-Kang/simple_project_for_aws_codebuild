@@ -16,4 +16,4 @@ phases:
       - echo Build completed on `date`
 artifacts:
   files:
-    - target/my_example_v0.1.jar ## 아티팩트 출력 경로
+    - target/*.jar ## 아티팩트 출력 경로
