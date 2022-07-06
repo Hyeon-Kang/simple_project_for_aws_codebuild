@@ -10,6 +10,7 @@ phases:
   build: ## 빌드
     commands:
       - echo Build started on `date`
+      - cd ./simple_project
       - mvn clean install ## maven 빌드
   post_build:
     commands:
