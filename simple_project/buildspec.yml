@@ -14,10 +14,9 @@ phases:
       - cd ./simple_project ## 프로젝트 루트 디렉토리로 진입
       - echo simple project root directory
       - mvn clean install ## maven 빌드
-      - cd .. ## target 검색을 위해 상위 디렉토리로 이동
   post_build:
     commands:
       - echo Build completed on `date`
 artifacts:
   files:
-    - target/*.jar ## 아티팩트 출력 경로
+    - simple_project/target/*.jar ## 아티팩트 출력 경로
