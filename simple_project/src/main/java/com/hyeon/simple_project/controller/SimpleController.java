@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/iam")
+@RequestMapping("/")
 public class SimpleController {
 
 	@Value("${aws.accessKey}")
@@ -27,16 +28,28 @@ public class SimpleController {
     @Autowired
     SimpleService simpService;
 
+	// Home
+	@GetMapping("/")
+	public Map<String, String> getHome() {
+		HashMap<String, String> msgMap = new HashMap<String, String>();
+		msgMap.put("msg", "MySimpleProject~~");
+		return msgMap;
+	}
 
+	@GetMapping("/health")
+	public String getHealthCheck() {
+		return "OK~~~";
+	}
 
 	// IAM 유저 목록 조회
-	@GetMapping("/getUsers")
+	@GetMapping("/iam/getUsers")
 	public List<String> getUsers() {
 		AwsCredentialsVo credentVo = simpService.getValuesVo(accessKey, secretKey, region);
         return simpService.getIamUserList(credentVo);
 	}
 
-	@GetMapping("/test")
+	//  resource key test
+	@GetMapping("/iam/test")
 	public AwsCredentialsVo getValues() {
 		return simpService.getValuesVo(accessKey, secretKey, region);
 	}
