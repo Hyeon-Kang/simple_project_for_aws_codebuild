@@ -25,14 +25,14 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo docker start!
-      - sudo service docker start
+      - sudo systemctl start docker
       - ls ## 로깅용
       ## ECR Image Upload (ECR Push 명령 참조)
       - echo push this image!
-      - sudo docker build -t my_spring_dev .
-      - sudo docker tag my_spring_dev:latest 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev:latest
+      - sudo docker build -t my_spring_prod .
+      - sudo docker tag my_spring_prod:latest 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_prod:latest
       - sudo docker images
-      - sudo docker push 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev:latest
+      - sudo docker push 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_prod:latest
 artifacts:
   files:
     - simple_project/target/simple_project-0.0.1-SNAPSHOT.jar
