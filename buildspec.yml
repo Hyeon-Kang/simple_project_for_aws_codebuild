@@ -1,3 +1,4 @@
+## DEV
 version: 0.2
 
 phases:
@@ -8,7 +9,8 @@ phases:
     commands:
       - echo Logging in to Amazon ECR
       - aws --version
-#      - aws ecr
+      ## ECR Login
+      - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com
   build: ## 빌드
     commands:
       - echo Build started on `date`
@@ -19,8 +21,11 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      # - echo running simple_project-0.0.1-SNAPSHOT_jar
-      # - java -jar ./target/simple_project-0.0.1-SNAPSHOT.jar
+      - echo push this image!
+      ## ECR Push 명령 참조
+      - docker build -t my_spring_dev .
+      - docker tag my_spring_dev:latest 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev:latest
+      - docker push 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev:latest
 artifacts:
   files:
     - simple_project/target/simple_project-0.0.1-SNAPSHOT.jar
