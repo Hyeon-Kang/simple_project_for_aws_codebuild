@@ -19,8 +19,8 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo running simple_project-0.0.1-SNAPSHOT_jar
-      - java -jar ./target/simple_project-0.0.1-SNAPSHOT.jar
+      # - echo running simple_project-0.0.1-SNAPSHOT_jar
+      # - java -jar ./target/simple_project-0.0.1-SNAPSHOT.jar
 artifacts:
   files:
     - simple_project/target/simple_project-0.0.1-SNAPSHOT.jar
