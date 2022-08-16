@@ -1,0 +1,38 @@
+## DEV
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Entered the install phase...
+      - yum install -y docker ## Docker 설치
+    runtime-versions:
+      java: corretto17
+  pre_build: ## 빌드 전
+    commands:
+      - echo Logging in to Amazon ECR
+      - aws --version ## AWS CLI 설치 확인
+      ## ECR Login (ECR Push 명령 참조)
+      - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com
+  build: ## 빌드
+    commands:
+      - echo Build started on `date`
+      - pwd ## 현재 위치 로깅용
+      - cd ./simple_project ## 프로젝트 루트 디렉토리로 진입
+      - echo maven build
+      - mvn clean package ## maven 빌드
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo docker start!
+      - sudo service docker start
+      - ls ## 로깅용
+      ## ECR Image Upload (ECR Push 명령 참조)
+      - echo push this image!
+      - sudo docker build -t my_spring_dev .
+      - sudo docker tag my_spring_dev:latest 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev:latest
+      - sudo docker images
+      - sudo docker push 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev:latest
+artifacts:
+  files:
+    - simple_project/target/simple_project-0.0.1-SNAPSHOT.jar
