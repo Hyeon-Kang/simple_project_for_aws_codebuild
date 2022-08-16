@@ -25,7 +25,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo docker start!
-      - sudo service docker start
+      - sudo systemctl start docker
       - ls ## 로깅용
       ## ECR Image Upload (ECR Push 명령 참조)
       - echo push this image!
