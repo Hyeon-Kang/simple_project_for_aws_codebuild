@@ -25,9 +25,11 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo push this image!
+      - ls
       ## ECR Push 명령 참조
       - docker build -t my_spring_dev .
       - docker tag my_spring_dev:latest 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev:latest
+      - docker images
       - docker push 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev:latest
 artifacts:
   files:
