@@ -3,6 +3,9 @@ version: 0.2
 
 phases:
   install:
+    commands:
+      - echo Entered the install phase...
+      - yum install -y docker
     runtime-versions:
       java: corretto17
   pre_build: ## 빌드 전
