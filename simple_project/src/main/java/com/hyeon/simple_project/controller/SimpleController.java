@@ -5,6 +5,7 @@ import com.hyeon.simple_project.vo.AwsCredentialsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +40,11 @@ public class SimpleController {
 	@GetMapping("/health")
 	public String getHealthCheck() {
 		return "OK~~~";
+	}
+
+	@GetMapping("/echo/{msg}")
+	public String getEcho(@PathVariable String msg) {
+		return simpService.getEchoService(msg);
 	}
 
 	// IAM 유저 목록 조회

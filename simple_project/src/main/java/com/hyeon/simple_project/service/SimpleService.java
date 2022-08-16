@@ -25,6 +25,10 @@ public class SimpleService {
 //    @Value("${aws.region}")
 //    private String region;
 
+    public String getEchoService(String input_msg) {
+        return input_msg;
+    }
+
 
 //    public AwsCredentialsVo getValuesVo(String accessKey, String secretKey, String region) {
 //        AwsCredentialsVo credentVo = new AwsCredentialsVo();
