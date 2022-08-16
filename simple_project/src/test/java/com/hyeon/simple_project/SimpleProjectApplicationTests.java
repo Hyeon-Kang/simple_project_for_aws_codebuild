@@ -3,6 +3,7 @@ package com.hyeon.simple_project;
 import com.hyeon.simple_project.service.SimpleService;
 import com.hyeon.simple_project.vo.AwsCredentialsVo;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,5 +39,12 @@ class SimpleProjectApplicationTests {
 //		emptyCredentVo = simpleService.getValuesVo(accessKey, secretKey, region);
 //		assertNotEquals(emptyCredentVo.getAccessKey(), null);
 //	}
+
+    @Test
+    void getEcho_test() {
+        SimpleService simpleService = new SimpleService();
+        String test_input_params = "test_msg";
+        assertEquals(simpleService.getEchoService(test_input_params), test_input_params);
+    }
 
 }
