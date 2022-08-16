@@ -2,7 +2,7 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions: ## 런타임 설정 ## Java 1.8을 사용하였으나 corretto11은 Java11 을 기반으로 한 상위 버전이므로 사용 가능
+    runtime-versions:
       java: corretto8
   pre_build: ## 빌드 전
     commands:
