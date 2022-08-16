@@ -24,9 +24,12 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo push this image!
+      - echo docker start!
+      - service docker start
+      - echo ls!
       - ls
       ## ECR Push 명령 참조
+      - echo push this image!
       - docker build -t my_spring_dev .
       - docker tag my_spring_dev:latest 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev:latest
       - docker images
