@@ -25,6 +25,7 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - printf '[{"name":"container_name","imageUri":"image_URI"}]' > imagedefinitions.json
 #       - echo docker start!
 #       - sudo systemctl start docker
 #       - ls ## 로깅용
@@ -36,4 +37,5 @@ phases:
       - docker push 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev:latest
 artifacts:
   files:
-    - simple_project/target/simple_project-0.0.1-SNAPSHOT.jar
+    # - simple_project/target/simple_project-0.0.1-SNAPSHOT.jar
+    - imagedefinitions.json
