@@ -26,8 +26,9 @@ phases:
     commands:
       - echo Build completed on `date`
       # - ls ## ./simple_project 디렉토리 검증
-      - printf '[{"name":"my_spring_dev_container","imageUri":"392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev"}]' > imagedefinitions.json    
-#       - echo docker start!
+      - printf '[{"name":"my_spring_dev_container","imageUri":"392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev"}]' > imagedefinitions.json  
+      - mv imagedefinitions.json ../imagedefinitions.json
+#       - echo docker start
 #       - sudo systemctl start docker
 #       - ls ## 로깅용
       ## ECR Image Upload (ECR Push 명령 참조)
@@ -41,4 +42,4 @@ phases:
 artifacts:
   files:
     # - simple_project/target/simple_project-0.0.1-SNAPSHOT.jar
-    - simple_project/imagedefinitions.json
+    - imagedefinitions.json
