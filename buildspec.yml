@@ -25,7 +25,7 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - ls ## ./simple_project 디렉토리 검증
+      # - ls ## ./simple_project 디렉토리 검증
       - printf '[{"name":"my_spring_dev_container","imageUri":"392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev"}]' > ../imagedefinitions.json    
 #       - echo docker start!
 #       - sudo systemctl start docker
@@ -36,8 +36,8 @@ phases:
       - docker tag my_spring_dev:latest 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev:latest
       - docker images
       - docker push 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev:latest
-      - cd ../ ## imagedefinitions.json 검증
-      - ls ## imagedefinitions.json 검증
+      # - cd ../ ## imagedefinitions.json 검증
+      # - ls ## imagedefinitions.json 검증
 artifacts:
   files:
     # - simple_project/target/simple_project-0.0.1-SNAPSHOT.jar
