@@ -26,9 +26,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - ls ## ./simple_project
-      - cd ../
-      - ls ## ../simple_project
-      - printf '[{"name":"container_name","imageUri":"image_URI"}]' > imagedefinitions.json
+      - printf '[{"name":"container_name","imageUri":"image_URI"}]' > ../imagedefinitions.json    
 #       - echo docker start!
 #       - sudo systemctl start docker
 #       - ls ## 로깅용
@@ -38,6 +36,8 @@ phases:
       - docker tag my_spring_dev:latest 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev:latest
       - docker images
       - docker push 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev:latest
+      - cd ../
+      - ls ## imagedefinitions.json 검증
 artifacts:
   files:
     # - simple_project/target/simple_project-0.0.1-SNAPSHOT.jar
