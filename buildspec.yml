@@ -25,6 +25,9 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - ls ## ./simple_project
+      - cd ../
+      - ls ## ../simple_project
       - printf '[{"name":"container_name","imageUri":"image_URI"}]' > imagedefinitions.json
 #       - echo docker start!
 #       - sudo systemctl start docker
