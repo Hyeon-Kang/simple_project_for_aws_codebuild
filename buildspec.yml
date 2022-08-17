@@ -25,7 +25,7 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - ls ## ./simple_project
+      - ls ## ./simple_project 디렉토리 검증
       - printf '[{"name":"my_spring_dev_container","imageUri":"392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_dev"}]' > ../imagedefinitions.json    
 #       - echo docker start!
 #       - sudo systemctl start docker

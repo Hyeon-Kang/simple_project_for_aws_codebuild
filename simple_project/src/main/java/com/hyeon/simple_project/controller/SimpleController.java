@@ -33,7 +33,7 @@ public class SimpleController {
 	@GetMapping("/")
 	public Map<String, String> getHome() {
 		HashMap<String, String> msgMap = new HashMap<String, String>();
-		msgMap.put("msg", "MySimpleProject~~");
+		msgMap.put("msg", "MySimpleProject v_0.1~~");
 		return msgMap;
 	}
 
