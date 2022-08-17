@@ -6,7 +6,7 @@ phases:
     commands:
       - echo "env - prod"
       - echo Entered the install phase...
-      - yum install -y docker ## Docker 설치
+#       - yum install -y docker ## Docker 설치
     runtime-versions:
       java: corretto17
   pre_build: ## 빌드 전
@@ -18,22 +18,22 @@ phases:
   build: ## 빌드
     commands:
       - echo Build started on `date`
-      - pwd ## 현재 위치 로깅용
+#       - pwd ## 현재 위치 로깅용
       - cd ./simple_project ## 프로젝트 루트 디렉토리로 진입
       - echo maven build
       - mvn clean package ## maven 빌드
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo docker start!
-      - sudo systemctl start docker
-      - ls ## 로깅용
+#       - echo docker start!
+#       - sudo systemctl start docker
+#       - ls ## 로깅용
       ## ECR Image Upload (ECR Push 명령 참조)
       - echo push this image!
-      - sudo docker build -t my_spring_prod .
-      - sudo docker tag my_spring_prod:latest 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_prod:latest
-      - sudo docker images
-      - sudo docker push 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_prod:latest
+      - docker build -t my_spring_prod .
+      - docker tag my_spring_prod:latest 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_prod:latest
+      - docker images
+      - docker push 392434356039.dkr.ecr.ap-northeast-1.amazonaws.com/my_spring_prod:latest
 artifacts:
   files:
     - simple_project/target/simple_project-0.0.1-SNAPSHOT.jar
