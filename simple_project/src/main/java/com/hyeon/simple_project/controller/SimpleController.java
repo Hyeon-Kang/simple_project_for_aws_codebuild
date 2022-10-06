@@ -15,14 +15,14 @@ import java.util.Map;
 @RequestMapping("/iam")
 public class SimpleController {
 
-	@Value("${aws.accessKey}")
-	private String accessKey;
+// 	@Value("${aws.accessKey}")
+// 	private String accessKey;
 
-	@Value("${aws.secretKey}")
-	private String secretKey;
+// 	@Value("${aws.secretKey}")
+// 	private String secretKey;
 
-	@Value("${aws.region}")
-	private String region;
+// 	@Value("${aws.region}")
+// 	private String region;
 
     @Autowired
     SimpleService simpService;
@@ -45,15 +45,15 @@ public class SimpleController {
 		return simpService.getEchoService(msg);
 	}
 	
-	// IAM 유저 목록 조회
-	@GetMapping("/getUsers")
-	public List<String> getUsers() {
-		AwsCredentialsVo credentVo = simpService.getValuesVo(accessKey, secretKey, region);
-        return simpService.getIamUserList(credentVo);
-	}
+// 	// IAM 유저 목록 조회
+// 	@GetMapping("/getUsers")
+// 	public List<String> getUsers() {
+// 		AwsCredentialsVo credentVo = simpService.getValuesVo(accessKey, secretKey, region);
+//         return simpService.getIamUserList(credentVo);
+// 	}
 
-	@GetMapping("/test")
-	public AwsCredentialsVo getValues() {
-		return simpService.getValuesVo(accessKey, secretKey, region);
-	}
+// 	@GetMapping("/test")
+// 	public AwsCredentialsVo getValues() {
+// 		return simpService.getValuesVo(accessKey, secretKey, region);
+// 	}
 }
