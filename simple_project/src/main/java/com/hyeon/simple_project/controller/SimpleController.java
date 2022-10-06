@@ -27,9 +27,22 @@ public class SimpleController {
     @Autowired
     SimpleService simpService;
 	
+	// Home
 	@GetMapping("/")
-	public String getHome() {
-		return "Hello~~~";
+	public Map<String, String> getHome() {
+		HashMap<String, String> msgMap = new HashMap<String, String>();
+		msgMap.put("msg", "MySimpleProject v_0.1~~");
+		return msgMap;
+	}
+
+	@GetMapping("/health")
+	public String getHealthCheck() {
+		return "OK~~~";
+	}
+
+	@GetMapping("/echo/{msg}")
+	public String getEcho(@PathVariable String msg) {
+		return simpService.getEchoService(msg);
 	}
 	
 	// IAM 유저 목록 조회
