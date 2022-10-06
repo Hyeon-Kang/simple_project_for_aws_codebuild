@@ -26,9 +26,12 @@ public class SimpleController {
 
     @Autowired
     SimpleService simpService;
-
-
-
+	
+	@GetMapping("/")
+	public String getHome() {
+		return "Hello~~~";
+	}
+	
 	// IAM 유저 목록 조회
 	@GetMapping("/getUsers")
 	public List<String> getUsers() {
